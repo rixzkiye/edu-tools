@@ -1,0 +1,152 @@
+[
+  {
+    "id": "iq_001",
+    "difficulty": "easy",
+    "category": "logical",
+    "question": {
+      "id": "Jika semua kucing adalah hewan, dan Fluffy adalah kucing, maka:",
+      "en": "If all cats are animals, and Fluffy is a cat, then:",
+      "zh": "如果所有猫都是动物，而Fluffy是一只猫，那么："
+    },
+    "choices": [
+      {
+        "text": {
+          "id": "Fluffy adalah hewan",
+          "en": "Fluffy is an animal",
+          "zh": "Fluffy是动物"
+        },
+        "isCorrect": true
+      },
+      {
+        "text": {
+          "id": "Fluffy bukan hewan",
+          "en": "Fluffy is not an animal",
+          "zh": "Fluffy不是动物"
+        },
+        "isCorrect": false
+      },
+      {
+        "text": {
+          "id": "Tidak dapat ditentukan",
+          "en": "Cannot be determined",
+          "zh": "无法确定"
+        },
+        "isCorrect": false
+      },
+      {
+        "text": {
+          "id": "Semua hewan adalah kucing",
+          "en": "All animals are cats",
+          "zh": "所有动物都是猫"
+        },
+        "isCorrect": false
+      }
+    ],
+    "explanation": {
+      "id": "Berdasarkan silogisme: Semua kucing adalah hewan + Fluffy adalah kucing = Fluffy adalah hewan",
+      "en": "Based on syllogism: All cats are animals + Fluffy is a cat = Fluffy is an animal",
+      "zh": "基于三段论：所有猫都是动物 + Fluffy是猫 = Fluffy是动物"
+    },
+    "timeLimit": 60
+  },
+  {
+    "id": "iq_002",
+    "difficulty": "medium",
+    "category": "numerical",
+    "question": {
+      "id": "Deret angka: 2, 6, 12, 20, 30, ?",
+      "en": "Number sequence: 2, 6, 12, 20, 30, ?",
+      "zh": "数字序列：2, 6, 12, 20, 30, ?"
+    },
+    "choices": [
+      {
+        "text": {
+          "id": "40",
+          "en": "40",
+          "zh": "40"
+        },
+        "isCorrect": false
+      },
+      {
+        "text": {
+          "id": "42",
+          "en": "42",
+          "zh": "42"
+        },
+        "isCorrect": true
+      },
+      {
+        "text": {
+          "id": "44",
+          "en": "44",
+          "zh": "44"
+        },
+        "isCorrect": false
+      },
+      {
+        "text": {
+          "id": "46",
+          "en": "46",
+          "zh": "46"
+        },
+        "isCorrect": false
+      }
+    ],
+    "explanation": {
+      "id": "Pola: n(n+1) dimana n = 1,2,3,4,5,6... Jadi 6×7 = 42",
+      "en": "Pattern: n(n+1) where n = 1,2,3,4,5,6... So 6×7 = 42",
+      "zh": "模式：n(n+1)，其中n = 1,2,3,4,5,6...所以6×7 = 42"
+    },
+    "timeLimit": 90
+  },
+  {
+    "id": "iq_003",
+    "difficulty": "hard",
+    "category": "spatial",
+    "question": {
+      "id": "Jika sebuah kubus dipotong menjadi 27 kubus kecil yang sama, berapa banyak kubus kecil yang memiliki tepat 2 sisi yang dicat?",
+      "en": "If a cube is cut into 27 equal small cubes, how many small cubes have exactly 2 painted sides?",
+      "zh": "如果一个立方体被切成27个相等的小立方体，有多少个小立方体恰好有2个面被涂色？"
+    },
+    "choices": [
+      {
+        "text": {
+          "id": "8",
+          "en": "8",
+          "zh": "8"
+        },
+        "isCorrect": false
+      },
+      {
+        "text": {
+          "id": "12",
+          "en": "12",
+          "zh": "12"
+        },
+        "isCorrect": true
+      },
+      {
+        "text": {
+          "id": "16",
+          "en": "16",
+          "zh": "16"
+        },
+        "isCorrect": false
+      },
+      {
+        "text": {
+          "id": "6",
+          "en": "6",
+          "zh": "6"
+        },
+        "isCorrect": false
+      }
+    ],
+    "explanation": {
+      "id": "Kubus 3×3×3: kubus dengan 2 sisi cat berada di tepi (edge) = 12 buah",
+      "en": "3×3×3 cube: cubes with 2 painted sides are on the edges = 12 pieces",
+      "zh": "3×3×3立方体：有2个涂色面的立方体位于边缘 = 12个"
+    },
+    "timeLimit": 120
+  }
+]

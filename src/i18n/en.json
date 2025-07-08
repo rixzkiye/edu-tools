@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "Home",
+    "tools": "Tools",
+    "quiz": "Quiz",
+    "blog": "Blog",
+    "about": "About"
+  },
+  "common": {
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "start": "Start",
+    "next": "Next",
+    "previous": "Previous",
+    "finish": "Finish",
+    "reset": "Reset",
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!"
+  },
+  "home": {
+    "title": "Interactive Educational Platform",
+    "subtitle": "Explore fun and educational learning tools",
+    "hero": {
+      "title": "Learn in a Fun Way",
+      "description": "Interactive educational platform with various learning tools, quizzes, and educational content designed to enhance your knowledge.",
+      "cta": "Start Learning"
+    },
+    "features": {
+      "title": "Featured Tools",
+      "namePicker": {
+        "title": "Name Picker",
+        "description": "Interactive tool to randomly select names with engaging animations"
+      },
+      "quiz": {
+        "title": "Interactive Quizzes",
+        "description": "Various types of quizzes to test your knowledge and personality"
+      },
+      "slot": {
+        "title": "Slot Simulator",
+        "description": "Learn how slot machines work and probabilities with educational simulator"
+      }
+    }
+  },
+  "tools": {
+    "namePicker": {
+      "title": "Name Picker",
+      "description": "Randomly select names from your custom lists",
+      "addName": "Add Name",
+      "removeName": "Remove Name",
+      "pickName": "Pick Name",
+      "createList": "Create New List",
+      "listName": "List Name",
+      "noNames": "No names in the list yet",
+      "picked": "Picked: ",
+      "exportImage": "Export as Image"
+    }
+  },
+  "quiz": {
+    "iq": {
+      "title": "IQ Test",
+      "description": "Test your logical and reasoning abilities",
+      "timeLeft": "Time left: ",
+      "question": "Question",
+      "of": "of",
+      "score": "Your Score: ",
+      "explanation": "Explanation: "
+    },
+    "mbti": {
+      "title": "MBTI Personality Test",
+      "description": "Discover your personality type based on Myers-Briggs",
+      "result": "Your personality type: ",
+      "confidence": "Confidence level: "
+    },
+    "trivia": {
+      "title": "Trivia Quiz",
+      "description": "Test your general knowledge with various interesting topics"
+    }
+  },
+  "slot": {
+    "title": "Unveiling Slot Secrets",
+    "description": "Learn how slot machines work and the myths behind them",
+    "rtp": "RTP (Return to Player): ",
+    "spin": "Spin",
+    "autoSpin": "Auto Spin",
+    "balance": "Balance: ",
+    "bet": "Bet: ",
+    "win": "Win: ",
+    "educationMode": "Education Mode",
+    "myths": {
+      "title": "Myths vs Facts",
+      "myth1": "Myth: 'Hot' machines win more often",
+      "fact1": "Fact: Each spin is independent and random",
+      "myth2": "Myth: Playing longer increases chances",
+      "fact2": "Fact: RTP remains the same regardless of play duration"
+    }
+  }
+}

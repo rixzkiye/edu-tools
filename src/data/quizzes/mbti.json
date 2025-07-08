@@ -1,0 +1,226 @@
+[
+  {
+    "id": "mbti_001",
+    "dimension": "E_I",
+    "question": {
+      "id": "Saya merasa berenergi setelah menghabiskan waktu dengan banyak orang",
+      "en": "I feel energized after spending time with many people",
+      "zh": "与很多人在一起后我感到精力充沛"
+    },
+    "choices": [
+      {
+        "text": {
+          "id": "Sangat Tidak Setuju",
+          "en": "Strongly Disagree",
+          "zh": "非常不同意"
+        },
+        "dimension": "I",
+        "weight": 2
+      },
+      {
+        "text": {
+          "id": "Tidak Setuju",
+          "en": "Disagree",
+          "zh": "不同意"
+        },
+        "dimension": "I",
+        "weight": 1
+      },
+      {
+        "text": {
+          "id": "Netral",
+          "en": "Neutral",
+          "zh": "中立"
+        },
+        "dimension": "E",
+        "weight": 0
+      },
+      {
+        "text": {
+          "id": "Setuju",
+          "en": "Agree",
+          "zh": "同意"
+        },
+        "dimension": "E",
+        "weight": 1
+      },
+      {
+        "text": {
+          "id": "Sangat Setuju",
+          "en": "Strongly Agree",
+          "zh": "非常同意"
+        },
+        "dimension": "E",
+        "weight": 2
+      }
+    ]
+  },
+  {
+    "id": "mbti_002",
+    "dimension": "S_N",
+    "question": {
+      "id": "Saya lebih suka fokus pada detail dan fakta konkret",
+      "en": "I prefer to focus on details and concrete facts",
+      "zh": "我更喜欢关注细节和具体事实"
+    },
+    "choices": [
+      {
+        "text": {
+          "id": "Sangat Tidak Setuju",
+          "en": "Strongly Disagree",
+          "zh": "非常不同意"
+        },
+        "dimension": "N",
+        "weight": 2
+      },
+      {
+        "text": {
+          "id": "Tidak Setuju",
+          "en": "Disagree",
+          "zh": "不同意"
+        },
+        "dimension": "N",
+        "weight": 1
+      },
+      {
+        "text": {
+          "id": "Netral",
+          "en": "Neutral",
+          "zh": "中立"
+        },
+        "dimension": "S",
+        "weight": 0
+      },
+      {
+        "text": {
+          "id": "Setuju",
+          "en": "Agree",
+          "zh": "同意"
+        },
+        "dimension": "S",
+        "weight": 1
+      },
+      {
+        "text": {
+          "id": "Sangat Setuju",
+          "en": "Strongly Agree",
+          "zh": "非常同意"
+        },
+        "dimension": "S",
+        "weight": 2
+      }
+    ]
+  },
+  {
+    "id": "mbti_003",
+    "dimension": "T_F",
+    "question": {
+      "id": "Saya membuat keputusan berdasarkan logika dan analisis objektif",
+      "en": "I make decisions based on logic and objective analysis",
+      "zh": "我基于逻辑和客观分析做决定"
+    },
+    "choices": [
+      {
+        "text": {
+          "id": "Sangat Tidak Setuju",
+          "en": "Strongly Disagree",
+          "zh": "非常不同意"
+        },
+        "dimension": "F",
+        "weight": 2
+      },
+      {
+        "text": {
+          "id": "Tidak Setuju",
+          "en": "Disagree",
+          "zh": "不同意"
+        },
+        "dimension": "F",
+        "weight": 1
+      },
+      {
+        "text": {
+          "id": "Netral",
+          "en": "Neutral",
+          "zh": "中立"
+        },
+        "dimension": "T",
+        "weight": 0
+      },
+      {
+        "text": {
+          "id": "Setuju",
+          "en": "Agree",
+          "zh": "同意"
+        },
+        "dimension": "T",
+        "weight": 1
+      },
+      {
+        "text": {
+          "id": "Sangat Setuju",
+          "en": "Strongly Agree",
+          "zh": "非常同意"
+        },
+        "dimension": "T",
+        "weight": 2
+      }
+    ]
+  },
+  {
+    "id": "mbti_004",
+    "dimension": "J_P",
+    "question": {
+      "id": "Saya lebih suka memiliki rencana yang terstruktur dan jadwal yang jelas",
+      "en": "I prefer to have structured plans and clear schedules",
+      "zh": "我更喜欢有结构化的计划和明确的时间表"
+    },
+    "choices": [
+      {
+        "text": {
+          "id": "Sangat Tidak Setuju",
+          "en": "Strongly Disagree",
+          "zh": "非常不同意"
+        },
+        "dimension": "P",
+        "weight": 2
+      },
+      {
+        "text": {
+          "id": "Tidak Setuju",
+          "en": "Disagree",
+          "zh": "不同意"
+        },
+        "dimension": "P",
+        "weight": 1
+      },
+      {
+        "text": {
+          "id": "Netral",
+          "en": "Neutral",
+          "zh": "中立"
+        },
+        "dimension": "J",
+        "weight": 0
+      },
+      {
+        "text": {
+          "id": "Setuju",
+          "en": "Agree",
+          "zh": "同意"
+        },
+        "dimension": "J",
+        "weight": 1
+      },
+      {
+        "text": {
+          "id": "Sangat Setuju",
+          "en": "Strongly Agree",
+          "zh": "非常同意"
+        },
+        "dimension": "J",
+        "weight": 2
+      }
+    ]
+  }
+]

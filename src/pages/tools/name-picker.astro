@@ -1,0 +1,516 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/layout/Navigation.astro';
+import { t, defaultLocale } from '../../i18n/utils';
+
+const locale = defaultLocale;
+const title = t('tools.namePicker.title', locale);
+const description = t('tools.namePicker.description', locale);
+---
+
+<BaseLayout title={title} description={description} locale={locale}>
+  <Navigation locale={locale} />
+  
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-purple-900 py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          {t('tools.namePicker.title', locale)}
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+          {t('tools.namePicker.description', locale)}
+        </p>
+      </div>
+
+      <!-- Usage Counter -->
+      <div class="bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded-lg p-4 mb-6">
+        <div class="flex items-center">
+          <i class="fas fa-info-circle text-yellow-600 dark:text-yellow-400 mr-2"></i>
+          <span class="text-yellow-800 dark:text-yellow-200">
+            <span id="usage-count">3</span> free uses remaining today
+          </span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Name Management Panel -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
+              {t('tools.namePicker.listName', locale)}
+            </h2>
+            <div class="flex space-x-2">
+              <select id="list-selector" class="form-select">
+                <option value="Daftar Utama">Daftar Utama</option>
+              </select>
+              <button id="create-list-btn" class="btn-secondary">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Add Name Form -->
+          <div class="mb-6">
+            <div class="flex space-x-2">
+              <input 
+                type="text" 
+                id="name-input" 
+                placeholder={t('tools.namePicker.addName', locale)}
+                class="form-input flex-1"
+                maxlength="50"
+              />
+              <button id="add-name-btn" class="btn-primary">
+                <i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Names List -->
+          <div class="space-y-2 max-h-96 overflow-y-auto" id="names-list">
+            <!-- Names will be populated here -->
+          </div>
+
+          <!-- Empty State -->
+          <div id="empty-state" class="text-center py-8 text-gray-500 dark:text-gray-400 hidden">
+            <i class="fas fa-users text-4xl mb-4"></i>
+            <p>{t('tools.namePicker.noNames', locale)}</p>
+          </div>
+        </div>
+
+        <!-- Picker Panel -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+            {t('tools.namePicker.pickName', locale)}
+          </h2>
+
+          <!-- Spinning Wheel -->
+          <div class="relative mb-8">
+            <div id="spinning-wheel" class="w-64 h-64 mx-auto relative">
+              <div class="absolute inset-0 rounded-full border-8 border-gray-200 dark:border-gray-700"></div>
+              <div id="wheel-content" class="absolute inset-2 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                <div id="wheel-text" class="text-white font-bold text-lg text-center">
+                  {t('common.start', locale)}
+                </div>
+              </div>
+              <!-- Pointer -->
+              <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2">
+                <div class="w-0 h-0 border-l-4 border-r-4 border-b-8 border-l-transparent border-r-transparent border-b-red-500"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="space-y-4">
+            <button id="pick-btn" class="btn-primary w-full" disabled>
+              <i class="fas fa-random mr-2"></i>
+              {t('tools.namePicker.pickName', locale)}
+            </button>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <button id="export-btn" class="btn-secondary" disabled>
+                <i class="fas fa-download mr-2"></i>
+                {t('tools.namePicker.exportImage', locale)}
+              </button>
+              <button id="reset-btn" class="btn-secondary">
+                <i class="fas fa-redo mr-2"></i>
+                {t('common.reset', locale)}
+              </button>
+            </div>
+          </div>
+
+          <!-- Result Display -->
+          <div id="result-display" class="mt-6 p-4 bg-green-50 dark:bg-green-900 rounded-lg hidden">
+            <div class="text-center">
+              <i class="fas fa-trophy text-yellow-500 text-2xl mb-2"></i>
+              <p class="text-green-800 dark:text-green-200 font-medium">
+                {t('tools.namePicker.picked', locale)}
+              </p>
+              <p id="picked-name" class="text-2xl font-bold text-green-900 dark:text-green-100 mt-2"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Create List Modal -->
+  <div id="create-list-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        {t('tools.namePicker.createList', locale)}
+      </h3>
+      <input 
+        type="text" 
+        id="new-list-name" 
+        placeholder={t('tools.namePicker.listName', locale)}
+        class="form-input w-full mb-4"
+        maxlength="30"
+      />
+      <div class="flex space-x-4">
+        <button id="create-list-confirm" class="btn-primary flex-1">
+          {t('common.save', locale)}
+        </button>
+        <button id="create-list-cancel" class="btn-secondary flex-1">
+          {t('common.cancel', locale)}
+        </button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .name-item {
+    @apply flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg;
+  }
+  
+  .name-item.picked {
+    @apply bg-green-100 dark:bg-green-800 border border-green-300 dark:border-green-600;
+  }
+  
+  .spinning {
+    animation: spin 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(1440deg); }
+  }
+</style>
+
+<script>
+  class NamePicker {
+    constructor() {
+      this.currentList = 'Daftar Utama';
+      this.lists = { 'Daftar Utama': [] };
+      this.usageCount = 3;
+      this.isSpinning = false;
+      
+      this.loadData();
+      this.initializeElements();
+      this.bindEvents();
+      this.updateUI();
+    }
+    
+    loadData() {
+      const data = localStorage.getItem('namePickerData');
+      if (data) {
+        const parsed = JSON.parse(data);
+        this.currentList = parsed.currentList || 'Daftar Utama';
+        this.lists = parsed.lists || { 'Daftar Utama': [] };
+      }
+      
+      const usage = localStorage.getItem('toolUsage');
+      if (usage) {
+        const parsed = JSON.parse(usage);
+        this.usageCount = parsed.namePicker || 3;
+      }
+    }
+    
+    saveData() {
+      localStorage.setItem('namePickerData', JSON.stringify({
+        currentList: this.currentList,
+        lists: this.lists
+      }));
+      
+      const usage = JSON.parse(localStorage.getItem('toolUsage') || '{}');
+      usage.namePicker = this.usageCount;
+      localStorage.setItem('toolUsage', JSON.stringify(usage));
+    }
+    
+    initializeElements() {
+      this.elements = {
+        nameInput: document.getElementById('name-input'),
+        addNameBtn: document.getElementById('add-name-btn'),
+        namesList: document.getElementById('names-list'),
+        emptyState: document.getElementById('empty-state'),
+        pickBtn: document.getElementById('pick-btn'),
+        exportBtn: document.getElementById('export-btn'),
+        resetBtn: document.getElementById('reset-btn'),
+        listSelector: document.getElementById('list-selector'),
+        createListBtn: document.getElementById('create-list-btn'),
+        usageCount: document.getElementById('usage-count'),
+        spinningWheel: document.getElementById('spinning-wheel'),
+        wheelText: document.getElementById('wheel-text'),
+        resultDisplay: document.getElementById('result-display'),
+        pickedName: document.getElementById('picked-name')
+      };
+    }
+    
+    bindEvents() {
+      this.elements.addNameBtn.addEventListener('click', () => this.addName());
+      this.elements.nameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') this.addName();
+      });
+      this.elements.pickBtn.addEventListener('click', () => this.pickName());
+      this.elements.exportBtn.addEventListener('click', () => this.exportImage());
+      this.elements.resetBtn.addEventListener('click', () => this.resetPicks());
+      this.elements.listSelector.addEventListener('change', (e) => this.switchList(e.target.value));
+      this.elements.createListBtn.addEventListener('click', () => this.showCreateListModal());
+      
+      // Modal events
+      document.getElementById('create-list-confirm').addEventListener('click', () => this.createList());
+      document.getElementById('create-list-cancel').addEventListener('click', () => this.hideCreateListModal());
+    }
+    
+    addName() {
+      const name = this.elements.nameInput.value.trim();
+      if (!name) return;
+      
+      if (this.lists[this.currentList].some(item => item.name === name)) {
+        if (window.showWarning) window.showWarning('Name already exists in the list');
+        return;
+      }
+      
+      this.lists[this.currentList].push({ name, picked: false });
+      this.elements.nameInput.value = '';
+      this.updateUI();
+      this.saveData();
+      
+      if (window.playSound) window.playSound('click');
+      if (window.showSuccess) window.showSuccess(`Added "${name}" to the list`);
+    }
+    
+    removeName(index) {
+      const name = this.lists[this.currentList][index].name;
+      this.lists[this.currentList].splice(index, 1);
+      this.updateUI();
+      this.saveData();
+      
+      if (window.playSound) window.playSound('click');
+      if (window.showInfo) window.showInfo(`Removed "${name}" from the list`);
+    }
+    
+    pickName() {
+      if (this.isSpinning || this.usageCount <= 0) return;
+      
+      const availableNames = this.lists[this.currentList].filter(item => !item.picked);
+      if (availableNames.length === 0) {
+        if (window.showWarning) window.showWarning('No names available to pick');
+        return;
+      }
+      
+      this.isSpinning = true;
+      this.usageCount--;
+      this.elements.pickBtn.disabled = true;
+      this.elements.usageCount.textContent = this.usageCount;
+      
+      // Spinning animation
+      this.elements.spinningWheel.classList.add('spinning');
+      if (window.playSound) window.playSound('spin');
+      
+      setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * availableNames.length);
+        const pickedName = availableNames[randomIndex];
+        
+        // Mark as picked
+        const originalIndex = this.lists[this.currentList].findIndex(item => item.name === pickedName.name);
+        this.lists[this.currentList][originalIndex].picked = true;
+        
+        // Show result
+        this.elements.pickedName.textContent = pickedName.name;
+        this.elements.resultDisplay.classList.remove('hidden');
+        this.elements.exportBtn.disabled = false;
+        
+        this.elements.spinningWheel.classList.remove('spinning');
+        this.isSpinning = false;
+        
+        this.updateUI();
+        this.saveData();
+        this.createConfetti();
+        
+        if (window.playSound) window.playSound('confetti');
+        if (window.showSuccess) window.showSuccess(`Picked: ${pickedName.name}`);
+        
+        if (this.usageCount <= 0) {
+          this.showAdOverlay();
+        }
+      }, 2000);
+    }
+    
+    resetPicks() {
+      this.lists[this.currentList].forEach(item => item.picked = false);
+      this.elements.resultDisplay.classList.add('hidden');
+      this.elements.exportBtn.disabled = true;
+      this.updateUI();
+      this.saveData();
+      
+      if (window.playSound) window.playSound('click');
+      if (window.showInfo) window.showInfo('All picks have been reset');
+    }
+    
+    updateUI() {
+      // Update names list
+      const namesList = this.elements.namesList;
+      namesList.innerHTML = '';
+      
+      if (this.lists[this.currentList].length === 0) {
+        this.elements.emptyState.classList.remove('hidden');
+        namesList.classList.add('hidden');
+        this.elements.pickBtn.disabled = true;
+      } else {
+        this.elements.emptyState.classList.add('hidden');
+        namesList.classList.remove('hidden');
+        
+        this.lists[this.currentList].forEach((item, index) => {
+          const nameItem = document.createElement('div');
+          nameItem.className = `name-item ${item.picked ? 'picked' : ''}`;
+          nameItem.innerHTML = `
+            <span class="flex items-center">
+              ${item.picked ? '<i class="fas fa-check text-green-500 mr-2"></i>' : ''}
+              <span class="${item.picked ? 'line-through text-gray-500' : ''}">${item.name}</span>
+            </span>
+            <button onclick="namePicker.removeName(${index})" class="text-red-500 hover:text-red-700">
+              <i class="fas fa-trash"></i>
+            </button>
+          `;
+          namesList.appendChild(nameItem);
+        });
+        
+        const availableNames = this.lists[this.currentList].filter(item => !item.picked);
+        this.elements.pickBtn.disabled = availableNames.length === 0 || this.usageCount <= 0;
+      }
+      
+      // Update list selector
+      this.elements.listSelector.innerHTML = '';
+      Object.keys(this.lists).forEach(listName => {
+        const option = document.createElement('option');
+        option.value = listName;
+        option.textContent = listName;
+        option.selected = listName === this.currentList;
+        this.elements.listSelector.appendChild(option);
+      });
+    }
+    
+    switchList(listName) {
+      this.currentList = listName;
+      this.elements.resultDisplay.classList.add('hidden');
+      this.elements.exportBtn.disabled = true;
+      this.updateUI();
+      this.saveData();
+    }
+    
+    showCreateListModal() {
+      document.getElementById('create-list-modal').classList.remove('hidden');
+    }
+    
+    hideCreateListModal() {
+      document.getElementById('create-list-modal').classList.add('hidden');
+      document.getElementById('new-list-name').value = '';
+    }
+    
+    createList() {
+      const listName = document.getElementById('new-list-name').value.trim();
+      if (!listName) return;
+      
+      if (this.lists[listName]) {
+        if (window.showWarning) window.showWarning('List name already exists');
+        return;
+      }
+      
+      this.lists[listName] = [];
+      this.currentList = listName;
+      this.hideCreateListModal();
+      this.updateUI();
+      this.saveData();
+      
+      if (window.showSuccess) window.showSuccess(`Created list: ${listName}`);
+    }
+    
+    createConfetti() {
+      const colors = ['#f39c12', '#e74c3c', '#3498db', '#2ecc71', '#9b59b6'];
+      
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.style.cssText = `
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: ${colors[Math.floor(Math.random() * colors.length)]};
+            left: ${Math.random() * 100}vw;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 1000;
+          `;
+          document.body.appendChild(confetti);
+          
+          setTimeout(() => confetti.remove(), 3000);
+        }, i * 50);
+      }
+    }
+    
+    async exportImage() {
+      try {
+        const { default: html2canvas } = await import('html2canvas');
+        const canvas = await html2canvas(this.elements.resultDisplay);
+        const link = document.createElement('a');
+        link.download = `name-picker-result-${Date.now()}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+        
+        if (window.showSuccess) window.showSuccess('Image exported successfully!');
+      } catch (error) {
+        if (window.showError) window.showError('Failed to export image');
+      }
+    }
+    
+    showAdOverlay() {
+      // Show 5-second ad overlay
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+      overlay.innerHTML = `
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 text-center max-w-md mx-4">
+          <h3 class="text-xl font-semibold mb-4">Daily Limit Reached</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">
+            You've used all your free picks for today. Watch this short ad to continue.
+          </p>
+          <div class="text-2xl font-bold text-blue-600 mb-4" id="ad-countdown">5</div>
+          <button id="close-ad" class="btn-primary" disabled>Continue</button>
+        </div>
+      `;
+      
+      document.body.appendChild(overlay);
+      
+      let countdown = 5;
+      const countdownEl = overlay.querySelector('#ad-countdown');
+      const closeBtn = overlay.querySelector('#close-ad');
+      
+      const timer = setInterval(() => {
+        countdown--;
+        countdownEl.textContent = countdown;
+        
+        if (countdown <= 0) {
+          clearInterval(timer);
+          closeBtn.disabled = false;
+          closeBtn.textContent = 'Continue';
+          closeBtn.addEventListener('click', () => {
+            overlay.remove();
+            this.usageCount = 3;
+            this.elements.usageCount.textContent = this.usageCount;
+            this.saveData();
+          });
+        }
+      }, 1000);
+    }
+  }
+  
+  // Initialize when DOM is loaded
+  let namePicker;
+  document.addEventListener('DOMContentLoaded', () => {
+    namePicker = new NamePicker();
+    window.namePicker = namePicker; // Make globally accessible
+  });
+</script>
+
+<style>
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(-100vh) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+</style>

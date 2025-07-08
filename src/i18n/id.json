@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "tools": "Alat",
+    "quiz": "Kuis",
+    "blog": "Blog",
+    "about": "Tentang"
+  },
+  "common": {
+    "language": "Bahasa",
+    "theme": "Tema",
+    "dark": "Gelap",
+    "light": "Terang",
+    "start": "Mulai",
+    "next": "Selanjutnya",
+    "previous": "Sebelumnya",
+    "finish": "Selesai",
+    "reset": "Reset",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "success": "Berhasil!"
+  },
+  "home": {
+    "title": "Platform Edukasi Interaktif",
+    "subtitle": "Jelajahi alat pembelajaran yang menyenangkan dan edukatif",
+    "hero": {
+      "title": "Belajar dengan Cara yang Menyenangkan",
+      "description": "Platform edukasi interaktif dengan berbagai alat pembelajaran, kuis, dan konten edukatif yang dirancang untuk meningkatkan pengetahuan Anda.",
+      "cta": "Mulai Belajar"
+    },
+    "features": {
+      "title": "Fitur Unggulan",
+      "namePicker": {
+        "title": "Pemilih Nama",
+        "description": "Alat interaktif untuk memilih nama secara acak dengan animasi menarik"
+      },
+      "quiz": {
+        "title": "Kuis Interaktif",
+        "description": "Berbagai jenis kuis untuk menguji pengetahuan dan kepribadian Anda"
+      },
+      "slot": {
+        "title": "Simulator Slot",
+        "description": "Pelajari cara kerja mesin slot dan probabilitas dengan simulator edukatif"
+      }
+    }
+  },
+  "tools": {
+    "namePicker": {
+      "title": "Pemilih Nama",
+      "description": "Pilih nama secara acak dari daftar yang Anda buat",
+      "addName": "Tambah Nama",
+      "removeName": "Hapus Nama",
+      "pickName": "Pilih Nama",
+      "createList": "Buat Daftar Baru",
+      "listName": "Nama Daftar",
+      "noNames": "Belum ada nama dalam daftar",
+      "picked": "Terpilih: ",
+      "exportImage": "Ekspor sebagai Gambar"
+    }
+  },
+  "quiz": {
+    "iq": {
+      "title": "Tes IQ",
+      "description": "Uji kemampuan logika dan penalaran Anda",
+      "timeLeft": "Waktu tersisa: ",
+      "question": "Pertanyaan",
+      "of": "dari",
+      "score": "Skor Anda: ",
+      "explanation": "Penjelasan: "
+    },
+    "mbti": {
+      "title": "Tes Kepribadian MBTI",
+      "description": "Temukan tipe kepribadian Anda berdasarkan Myers-Briggs",
+      "result": "Tipe kepribadian Anda: ",
+      "confidence": "Tingkat keyakinan: "
+    },
+    "trivia": {
+      "title": "Kuis Trivia",
+      "description": "Uji pengetahuan umum Anda dengan berbagai topik menarik"
+    }
+  },
+  "slot": {
+    "title": "Bongkar Rahasia Slot",
+    "description": "Pelajari cara kerja mesin slot dan mitos di baliknya",
+    "rtp": "RTP (Return to Player): ",
+    "spin": "Putar",
+    "autoSpin": "Putar Otomatis",
+    "balance": "Saldo: ",
+    "bet": "Taruhan: ",
+    "win": "Menang: ",
+    "educationMode": "Mode Edukasi",
+    "myths": {
+      "title": "Mitos vs Fakta",
+      "myth1": "Mitos: Mesin 'panas' lebih sering menang",
+      "fact1": "Fakta: Setiap putaran independen dan acak",
+      "myth2": "Mitos: Bermain lebih lama meningkatkan peluang",
+      "fact2": "Fakta: RTP tetap sama terlepas dari durasi bermain"
+    }
+  }
+}

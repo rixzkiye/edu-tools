@@ -1,0 +1,173 @@
+---
+import { t, getCurrentLocale, locales, localeNames, localeFlags, getLocalizedPath, type Locale } from '../../i18n/utils';
+
+export interface Props {
+  locale: Locale;
+  currentPath?: string;
+}
+
+const { locale, currentPath = '/' } = Astro.props;
+---
+
+<nav class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href={getLocalizedPath('/', locale)} class="flex items-center space-x-2 text-xl font-bold text-blue-600 dark:text-blue-400">
+          <i class="fas fa-graduation-cap"></i>
+          <span>EduTools</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href={getLocalizedPath('/', locale)} class="nav-link">
+          {t('nav.home', locale)}
+        </a>
+        <div class="relative group">
+          <button class="nav-link flex items-center space-x-1">
+            <span>{t('nav.tools', locale)}</span>
+            <i class="fas fa-chevron-down text-xs"></i>
+          </button>
+          <div class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <a href={getLocalizedPath('/tools/name-picker', locale)} class="dropdown-link">
+              <i class="fas fa-random"></i>
+              {t('tools.namePicker.title', locale)}
+            </a>
+            <a href={getLocalizedPath('/tools/slot-simulator', locale)} class="dropdown-link">
+              <i class="fas fa-dice"></i>
+              {t('slot.title', locale)}
+            </a>
+          </div>
+        </div>
+        <div class="relative group">
+          <button class="nav-link flex items-center space-x-1">
+            <span>{t('nav.quiz', locale)}</span>
+            <i class="fas fa-chevron-down text-xs"></i>
+          </button>
+          <div class="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <a href={getLocalizedPath('/quiz/iq', locale)} class="dropdown-link">
+              <i class="fas fa-brain"></i>
+              {t('quiz.iq.title', locale)}
+            </a>
+            <a href={getLocalizedPath('/quiz/mbti', locale)} class="dropdown-link">
+              <i class="fas fa-user"></i>
+              {t('quiz.mbti.title', locale)}
+            </a>
+            <a href={getLocalizedPath('/quiz/trivia', locale)} class="dropdown-link">
+              <i class="fas fa-question-circle"></i>
+              {t('quiz.trivia.title', locale)}
+            </a>
+          </div>
+        </div>
+        <a href={getLocalizedPath('/blog', locale)} class="nav-link">
+          {t('nav.blog', locale)}
+        </a>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center space-x-4">
+        <!-- Language Selector -->
+        <div class="relative group">
+          <button class="flex items-center space-x-1 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+            <span class="text-lg">{localeFlags[locale]}</span>
+            <i class="fas fa-chevron-down text-xs"></i>
+          </button>
+          <div class="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            {locales.map(loc => (
+              <a href={getLocalizedPath(currentPath, loc)} class="flex items-center space-x-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg">
+                <span class="text-lg">{localeFlags[loc]}</span>
+                <span class="text-sm">{localeNames[loc]}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-ring">
+          <i class="fas fa-sun dark:hidden"></i>
+          <i class="fas fa-moon hidden dark:block"></i>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus-ring">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+    <div class="px-4 py-4 space-y-4">
+      <a href={getLocalizedPath('/', locale)} class="mobile-nav-link">
+        <i class="fas fa-home"></i>
+        {t('nav.home', locale)}
+      </a>
+      
+      <div class="space-y-2">
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+          {t('nav.tools', locale)}
+        </div>
+        <a href={getLocalizedPath('/tools/name-picker', locale)} class="mobile-nav-link ml-4">
+          <i class="fas fa-random"></i>
+          {t('tools.namePicker.title', locale)}
+        </a>
+        <a href={getLocalizedPath('/tools/slot-simulator', locale)} class="mobile-nav-link ml-4">
+          <i class="fas fa-dice"></i>
+          {t('slot.title', locale)}
+        </a>
+      </div>
+      
+      <div class="space-y-2">
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+          {t('nav.quiz', locale)}
+        </div>
+        <a href={getLocalizedPath('/quiz/iq', locale)} class="mobile-nav-link ml-4">
+          <i class="fas fa-brain"></i>
+          {t('quiz.iq.title', locale)}
+        </a>
+        <a href={getLocalizedPath('/quiz/mbti', locale)} class="mobile-nav-link ml-4">
+          <i class="fas fa-user"></i>
+          {t('quiz.mbti.title', locale)}
+        </a>
+        <a href={getLocalizedPath('/quiz/trivia', locale)} class="mobile-nav-link ml-4">
+          <i class="fas fa-question-circle"></i>
+          {t('quiz.trivia.title', locale)}
+        </a>
+      </div>
+      
+      <a href={getLocalizedPath('/blog', locale)} class="mobile-nav-link">
+        <i class="fas fa-blog"></i>
+        {t('nav.blog', locale)}
+      </a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav-link {
+    @apply text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors;
+  }
+  
+  .dropdown-link {
+    @apply flex items-center space-x-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg;
+  }
+  
+  .mobile-nav-link {
+    @apply flex items-center space-x-3 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors;
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuToggle?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('hidden');
+    });
+  });
+</script>
