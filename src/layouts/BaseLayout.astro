@@ -1,0 +1,84 @@
+---
+import { getAlternateLinks, type Locale } from '../i18n/utils';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  currentPath?: string;
+}
+
+const { title, description, locale, currentPath = '/' } = Astro.props;
+const alternateLinks = getAlternateLinks(currentPath);
+---
+
+<!DOCTYPE html>
+<html lang={locale} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    
+    <!-- Alternate Language Links -->
+    {alternateLinks.map(link => (
+      <link rel="alternate" hreflang={link.hreflang} href={link.href} />
+    ))}
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
+    <!-- Theme Script (prevent FOUC) -->
+    <script is:inline>
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    </script>
+  </head>
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    <div id="theme-transition" class="fixed inset-0 pointer-events-none z-50 opacity-0"></div>
+    
+    <slot />
+    
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+    
+    <!-- Scripts -->
+    <script>
+      // Initialize core functionality when DOM is loaded
+      document.addEventListener('DOMContentLoaded', async () => {
+        try {
+          const { initializeTheme } = await import('/src/scripts/theme.ts');
+          const { initializeI18n } = await import('/src/scripts/i18n.ts');
+          const { initializeAudio } = await import('/src/scripts/audio.ts');
+          const { initializeToast } = await import('/src/scripts/toast.ts');
+          
+          initializeTheme();
+          initializeI18n();
+          await initializeAudio();
+          initializeToast();
+        } catch (error) {
+          console.warn('Failed to initialize some features:', error);
+        }
+      });
+    </script>
+  </body>
+</html>
+
+
